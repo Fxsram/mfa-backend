@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>MFA Setup</h2>
+<form method="post">{% csrf_token %}
+  <label>OTP type</label>
+  {{ form.otp_type }}
+  <button type="submit">Save</button>
+</form>
+
+{% if mfa.otp_type != "NONE" %}
+  <hr/>
+  <h3>Enroll your app</h3>
+  <p>Scan this QR in Google Authenticator / Authy / Microsoft Authenticator:</p>
+  {% if qr_data_uri %}
+    <img class="qr" src="{{ qr_data_uri }}" alt="QR code" width="220" height="220"/>
+  {% endif %}
+  <p class="muted">Or use this key manually:<br/><code>{{ mfa.secret }}</code></p>
+  {% if provisioning_uri %}
+    <details><summary>Provisioning URI (debug)</summary>
+      <code style="word-break: break-all;">{{ provisioning_uri }}</code>
+    </details>
+  {% endif %}
+
+  {% if live_totp %}
+    <p>Current TOTP (for testing): <strong>{{ live_totp }}</strong></p>
+  {% endif %}
+{% endif %}
+{% endblock %}
