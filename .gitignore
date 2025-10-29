@@ -1,0 +1,17 @@
+/.idea/
+db.sqlite3
+/media
+/config/.env
+.coverage
+__pycache__/
+.env
+env
+.venv
+docker-compose.yml-example
+
+#migrations
+#apps/eotw_auth/migrations/
+#apps/dictionaries/migrations/
+#apps/misc/migrations/
+#apps/personnel/migrations/
+#apps/order/migrations/
